@@ -68,4 +68,3 @@ CREATE TABLE ruta_auditoria (
 ) COMMENT "Tabla de Auditoría sobre la ruta";
 
 INSERT INTO dispositivos (id_dispositivo, temperatura_dis, humedad_dis, lluvia_dis, humedad_suelo_dis, monoxido_carbon_dis, pulso_emergencia_dis) VALUES (0, 0, 0, 0, 0, 0, 0);
-INSERT INTO usuarios (cedula_usu, nombre_usu, apellido_usu, celular_usu, fecha_usu) VALUES ('26715098', 'Jose', 'Cordova', '0978910274', '2019-12-13');
