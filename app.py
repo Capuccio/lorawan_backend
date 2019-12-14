@@ -177,6 +177,8 @@ def asignar_dispositivo():
         cursor.execute('SELECT * FROM dispositivos WHERE id_dispositivo = %s', (datos['dispositivo'], ))
         eldispositivo = cursor.fetchone()
 
+        altura = datos['altura'] if datos['altura'] != None else 0
+
         if eldispositivo == None:
             cursor.execute('INSERT INTO dispositivos (id_dispositivo, temperatura_dis, humedad_dis, lluvia_dis, humedad_suelo_dis, monoxido_carbon_dis, pulso_emergencia_dis) VALUES (%s, %s, %s, %s, %s, %s, %s)', (datos['dispositivo'], 0, 0, 0, 0, 0, 0))
             base_datos.commit()
@@ -186,9 +188,9 @@ def asignar_dispositivo():
             base_datos.commit()
             cursor.execute('UPDATE usuarios SET id_dispositivo = %s WHERE cedula_usu = %s', (datos['dispositivo'], datos['cedula']))
             base_datos.commit()
-            cursor.execute('UPDATE gps SET latitud_gps = %s, longitud_gps = %s, altura_gps = %s WHERE id_dispositivo = %s', (datos['latitud'], datos['longitud'], datos['altura'], datos['dispositivo']))
+            cursor.execute('UPDATE gps SET latitud_gps = %s, longitud_gps = %s, altura_gps = %s WHERE id_dispositivo = %s', (datos['latitud'], datos['longitud'], altura, datos['dispositivo']))
             base_datos.commit()
-            cursor.execute('UPDATE ruta SET latitud_rut = %s, longitud_rut = %s, altura_rut = %s WHERE id_gps = %s', (datos['latitud'], datos['longitud'], datos['altura'], id_gps))
+            cursor.execute('UPDATE ruta SET latitud_rut = %s, longitud_rut = %s, altura_rut = %s WHERE id_gps = %s', (datos['latitud'], datos['longitud'], altura, id_gps))
             base_datos.commit()
             cursor.execute('INSERT INTO auditoria (cedula_usu, id_dispositivo, fecha_aud) VALUES (%s, %s, %s)', (datos['cedula'], datos['dispositivo'], datos['fecha']))
             base_datos.commit()
@@ -200,9 +202,9 @@ def asignar_dispositivo():
         else:
             cursor.execute('UPDATE usuarios SET id_dispositivo = %s WHERE cedula_usu = %s', (datos['dispositivo'], datos['cedula']))
             base_datos.commit()
-            cursor.execute('UPDATE gps SET latitud_gps = %s, longitud_gps = %s, altura_gps = %s WHERE id_dispositivo = %s', (datos['latitud'], datos['longitud'], datos['altura'], datos['dispositivo']))
+            cursor.execute('UPDATE gps SET latitud_gps = %s, longitud_gps = %s, altura_gps = %s WHERE id_dispositivo = %s', (datos['latitud'], datos['longitud'], altura, datos['dispositivo']))
             base_datos.commit()
-            cursor.execute('UPDATE ruta SET latitud_rut = %s, longitud_rut = %s, altura_rut = %s WHERE id_gps = %s', (datos['latitud'], datos['longitud'], datos['altura'], id_gps))
+            cursor.execute('UPDATE ruta SET latitud_rut = %s, longitud_rut = %s, altura_rut = %s WHERE id_gps = %s', (datos['latitud'], datos['longitud'], altura, id_gps))
             base_datos.commit()
             cursor.execute('INSERT INTO auditoria (cedula_usu, id_dispositivo, fecha_aud) VALUES (%s, %s, %s)', (datos['cedula'], datos['dispositivo'], datos['fecha']))
             base_datos.commit()
